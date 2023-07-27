@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import OpportunityCard from './OpportunityCard';
 import axios from 'axios';
+import { getOpportunity } from '../Components/api';
 
 const Opportunity = () => {
   const [opportunities, setOpportunities] = useState([]);
@@ -15,7 +16,7 @@ const Opportunity = () => {
   // Fetch opportunities from the backend API
   const fetchOpportunities = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/opportunities/get'); // Replace this URL with the actual URL of your backend API endpoint for opportunities
+      const response = await getOpportunity();
       return response.data;
     } catch (error) {
       throw error;

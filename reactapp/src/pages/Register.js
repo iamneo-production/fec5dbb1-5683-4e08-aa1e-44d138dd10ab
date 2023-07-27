@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Checkbox, Grid, TextField } from '@mui/material';
 import { AccountCircle, Lock, LockOutlined, MailOutline, PhoneAndroidOutlined } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../Assets/css/Register.css';
 import axios from 'axios';
+import { getRegister, postRegister } from '../Components/api';
 
 const Register = () => {
   const [username, setUserName] = useState('');
@@ -16,11 +17,6 @@ const Register = () => {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    // Fetch existing user details or any other setup (if required) on component mount.
-    // For example, if you want to fetch existing user details from the server:
-    // axios.get('http://localhost:8080/users')
-    //   .then((response) => setDetails(response.data))
-    //   .catch((error) => console.error('Error fetching user details:', error));
   }, []);
 
   const validateForm = () => {
@@ -84,8 +80,7 @@ const Register = () => {
         alert('User already exists.');
       } else {
         console.log(data);
-        axios
-          .post('http://localhost:8080/register', data)
+        postRegister(data)
           .then(() => {
             setDetails([...details, data]);
             navigate('/');
@@ -93,13 +88,15 @@ const Register = () => {
           .catch((error) => {
             console.error('Error while registering:', error);
             alert('Registration failed. Please try again later.');
-          });
+          }
+          );
       }
     }
   };
 
   return (
-    <div>
+    <div className='body'>
+      <div className='register-container'>
       <h2 className='reg-h2'>Register</h2>
       <div className='reg-Card'>
         <form className='reg-form' onSubmit={handleSubmit}>
@@ -190,11 +187,15 @@ const Register = () => {
               </label>
             </Grid>
           </Grid>
+          <br/>
           <button type='submit'>
      <span class="box">
     Register      </span>
  </button>
+ <br/>
+ <Link to='/login'>Already Registered? Login</Link>
         </form>
+      </div>
       </div>
     </div>
   );

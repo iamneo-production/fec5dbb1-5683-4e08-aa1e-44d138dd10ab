@@ -14,6 +14,7 @@ import ProfilePage from "./pages/Profile";
 import VolunteerProfileCreation from "./pages/VolunteerProfile";
 import VolunteerDetails from "./Components/get";
 import ViewContactDetails from "./Components/get1";
+import ContactList from "./Components/ContactList";
 // import VolunteerProfileUpdate from "./pages/UpdateVolunteerDetails";
 
 function App() {
@@ -35,9 +36,12 @@ function App() {
         <Route path="/profile" element={<ProfilePage/>}/>
         <Route path="/volunteerprofilecreation" element={<VolunteerProfileCreation/>}/>
         <Route path="/viewdetails" element={<VolunteerDetails/>}/>
-        <Route path="/viewcontactdetails" element={<ViewContactDetails/>}/>
+        {/* <Route path="/viewcontactdetails" element={<ViewContactDetails/>}/> */}
+        <Route path="/viewcontactdetails" element={<ContactList/>}/>
         {/* <Route path="/volunteerprofileupdate" element={<VolunteerProfileUpdate/>}/> */}
+        
       </Routes>
+     
     </div>
   );
 

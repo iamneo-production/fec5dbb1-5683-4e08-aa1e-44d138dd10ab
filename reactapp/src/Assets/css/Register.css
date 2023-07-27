@@ -1,17 +1,27 @@
-.reg-Card {
-  height: 500px; 
-  width: 800px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin: 0 auto;
-  border-radius: 30px;
-  background: #e0e0e0;
-  box-shadow: 15px 15px 30px #bebebe,
-             -15px -15px 30px #ffffff;
+/* Register.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+.register-container {
+  background-image: url("../img/group-multiethnic-diverse-hands-raised.jpg");
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  max-width: 100%;
+  padding: 20px;
+}
+
 .reg-h2 {
   text-align: center;
   padding: 15px;
+  color: #000; /* Black text color for heading */
 }
 
 .reg-form {
@@ -19,8 +29,10 @@
   flex-direction: column;
   align-items: center;
 }
+
 label {
   margin-bottom: 5px;
+  color: #000; /* Black text color for labels */
 }
 
 .reg-input {
@@ -28,80 +40,39 @@ label {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 500px; 
-  box-sizing: border-box; 
+  width: 500px;
+  box-sizing: border-box;
+  color: #000; /* Black text color for input fields */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.reg-Card {
+  height: 550px;
+  width: 800px;
+  padding-top: 50px;
+  margin: 0 auto;
+  border-radius: 30px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border: 1px solid #ccc;
+}
+
+.reg-Card:hover {
+  transform: scale(1.05);
 }
 
 .error {
-  color: red;
+  color: #cc0000; /* Dark red text color for error messages */
   margin-bottom: 10px;
-  text-align: center; 
+  text-align: center;
 }
-.box {
-    width: 140px;
-    height: auto;
-    float: left;
-    transition: .5s linear;
-    position: relative;
-    display: block;
-    overflow: hidden;
-    padding: 15px;
-    text-align: center;
-    margin: 0 5px;
-    background: transparent;
-    text-transform: uppercase;
-    font-weight: 900;
-  }
-  
-  .box:before {
-    position: absolute;
-    content: '';
-    left: 0;
-    bottom: 0;
-    height: 4px;
+
+@media screen and (max-width: 600px) {
+  .reg-input {
     width: 100%;
-    border-bottom: 4px solid transparent;
-    border-left: 4px solid transparent;
-    box-sizing: border-box;
-    transform: translateX(100%);
   }
-  
-  .box:after {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    border-top: 4px solid transparent;
-    border-right: 4px solid transparent;
-    box-sizing: border-box;
-    transform: translateX(-100%);
+
+  .reg-Card {
+    max-width: 100%;
   }
-  
-  .box:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  }
-  
-  .box:hover:before {
-    border-color: #262626;
-    height: 100%;
-    transform: translateX(0);
-    transition: .3s transform linear, .3s height linear .3s;
-  }
-  
-  .box:hover:after {
-    border-color: #262626;
-    height: 100%;
-    transform: translateX(0);
-    transition: .3s transform linear, .3s height linear .5s;
-  }
-  
-  button {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    background: transparent;
-  }
+}

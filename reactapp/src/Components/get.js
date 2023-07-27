@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import "../Assets/css/get.css";
+import { deleteVolunteer, getVolunteer } from './api';
+import { Delete } from '@mui/icons-material';
 
 function VolunteerDetails() {
   
   const [volunteers, setVolunteers] = useState([]);
-
   useEffect(() => {
-    axios.get('http://localhost:8080/getVolunteer')
+    getVolunteer()
+
       .then(response => {
         setVolunteers(response.data);
       })
@@ -16,12 +18,9 @@ function VolunteerDetails() {
       });
   }, []);
 
-  // Function to handle delete button click for a volunteer
   const handleDelete = (id) => {
-    // Implement the logic to delete the volunteer with the given 'id' from the server
-    axios.delete(`http://localhost:8080/Volunteer/delete/${id}`)
+    deleteVolunteer(id)
       .then(response => {
-        // Assuming the delete operation was successful, remove the volunteer from the state
         setVolunteers(prevVolunteers => prevVolunteers.filter(volunteer => volunteer.id !== id));
       })
       .catch(error => {
@@ -44,7 +43,7 @@ function VolunteerDetails() {
             <th>Interests</th>
             <th>Availability</th>
             {/* <th>Resume</th> */}
-            <th>Actions</th> {/* Added a new column for Actions */}
+            <th>Actions</th> 
           </tr>
         </thead>
         <tbody>
@@ -60,7 +59,7 @@ function VolunteerDetails() {
               <td>
               
                 <button onClick={() => handleDelete(volunteer.id)}><span className="box">
-                 Delete
+                 <Delete/>
                 </span></button>
               </td>
             </tr>

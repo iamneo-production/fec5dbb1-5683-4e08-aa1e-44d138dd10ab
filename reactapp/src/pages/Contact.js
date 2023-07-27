@@ -1,117 +1,66 @@
-import React, { useState } from 'react';
-import Navbar from '../Components/NavBar';
-import '../Assets/css/Contact.css';
-import '../Assets/css/Footer.css';
-import Footer from '../Components/Footer';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addContact } from "./ContactActions";
+import ContactList from "../Components/ContactList";
+import "../Assets/css/Contact.css";
+import Navbar from "../Components/NavBar";
 
 const Contact = () => {
   const handleButtonClick = (event, path) => {
     event.preventDefault();
     window.location.href = path;
   };
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleMessageChange = (e) => {
-    setMessage(e.target.value);
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    setName('');
-    setEmail('');
-    setMessage('');
-    setSubmitted(true);
-    const formData = {
-      name : name,
-      email : email,
-      message : message,
-    }
-    
-    axios.post("http://localhost:8080/Contact/post", formData)
-      .then((response) => {
-        console.log(response.formData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(addContact(formData));
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
   };
 
   return (
-    <div >
+    <div>
       <div>
         <Navbar />
       </div>
       <div className="contact-container">
-        <h1>Contact Us</h1>
-
-        {submitted ? (
-          <p className="confirmation-message">
-            Thank you for your message. We'll get back to you shortly!
-          </p>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={handleNameChange}
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="message">Message:</label>
-              <textarea
-                id="message"
-                value={message}
-                onChange={handleMessageChange}
-                required
-              />
-            </div>
-
-            <button type='submit'>
-      <span class="box">
-          Submit
-      </span>
-  </button>
-  <button onClick={(e) => handleButtonClick(e, '/viewcontactdetails')}>
-      <span class="box">
-          View
-      </span>
-  </button>
-          </form>
-        )}
+        <h2>Add Contact</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Name:</label>
+          <input type="text" name="name" value={formData.name} onChange={handleChange} />
+          <label>Email:</label>
+          <input type="email" name="email" value={formData.email} onChange={handleChange} />
+          <label>Message:</label>
+          <textarea name="message" value={formData.message} onChange={handleChange} />
+          <button type='submit'>
+                <span className="box">
+                Submit
+                </span>
+              </button>
+          <button type='button' onClick={(e) => handleButtonClick(e, '/viewcontactdetails')}>
+                <span className="box">
+                VIEW DETAILS
+                </span>
+              </button>
+        </form>
       </div>
-      <footer>
-      <Footer/>
-      </footer>
-     
     </div>
   );
 };

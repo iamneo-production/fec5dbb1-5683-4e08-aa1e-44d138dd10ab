@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../Assets/css/get.css";
+import { getContact } from './api';
 
 function ViewContactDetails() {
   const [volunteer, setVolunteers] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/getContact')
+    getContact()
       .then(response => {
         setVolunteers(response.data);
       })
