@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../Assets/css/VolunteerDetails.css'; 
 import Navbar from '../Components/NavBar';
-import axios from 'axios';
+// import axios from 'axios';
+import { getVolunteer } from '../Components/api';
 
 const VolunteerDetailsPage = () => {
   const [volunteers, setVolunteers] = useState([]);
@@ -16,7 +17,7 @@ const VolunteerDetailsPage = () => {
   // Fetch volunteer details from the backend API
   const fetchVolunteerDetails = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/getVolunteer'); // Replace this URL with the actual URL of your Spring backend API endpoint
+      const response = await getVolunteer(); // Replace this URL with the actual URL of your Spring backend API endpoint
       return response.data;
     } catch (error) {
       throw error;

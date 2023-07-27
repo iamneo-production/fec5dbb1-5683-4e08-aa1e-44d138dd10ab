@@ -4,6 +4,7 @@ import { Lock, MailOutline } from '@mui/icons-material';
 import { Box, TextField } from '@mui/material';
 import '../Assets/css/Login.css';
 import axios from 'axios';
+import { getLogin } from '../Components/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -39,7 +40,7 @@ const Login = () => {
   }, []);
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/users");
+      const response = await getLogin();
       setDetails(response.data);
       console.log(response);
     } catch (error) {
@@ -63,6 +64,7 @@ const Login = () => {
 
   return (
     <div>
+      <div className='log-container'>
       <h2 className='log-h2'>Login</h2>
       <div className='log-Card'>
         <form className='log-form' onSubmit={handleSubmit}>
@@ -106,6 +108,7 @@ const Login = () => {
           <br />
           <Link to='/register'>Don't have an Account? Sign Up</Link>
         </form>
+      </div>
       </div>
     </div>
   );

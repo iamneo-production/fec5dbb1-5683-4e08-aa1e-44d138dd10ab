@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../Assets/css/Volunteer.css";
 import axios from 'axios';
 import Navbar from '../Components/NavBar';
+import { postVolunteer } from '../Components/api';
 
 function VolunteerProfileCreation() {
   const handleButtonClick = (event, path) => {
@@ -51,7 +52,7 @@ function VolunteerProfileCreation() {
       // resume : resume,
     }
     
-    axios.post("http://localhost:8080/Volunteer/post", formData)
+    postVolunteer(formData)
     .then((response) => {
       console.log(response.formData);
     })
